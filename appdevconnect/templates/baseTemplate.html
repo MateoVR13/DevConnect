@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" href="/appdevconnect/static/img/favicon.png">
+
+    <!-- Hojas de estilo -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" rel="stylesheet">
+</head>
+
+
+<body>
+
+    <!--INICIO DE BARRA DE NAVEGACION-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+        <div class="nav-item">
+
+            <ul class="navbar-nav mr-auto">
+
+                <a><img src="appdevconnect/static/img/favicon.png" alt="Logo de DevConnect" class="logo-img"
+                        style="width: 45px;"></a>
+
+                <a class="navbar-brand" href="#">DevConnect</a>
+
+                <li class="nav-item active" style="font-weight: bold;">
+                    <a class="nav-link" href="#">
+                        <i class="bi bi-chat-left-quote-fill"></i>
+                        Foro
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+
+
+                <a class="nav-link" href="#">
+                    <i class="bi bi-archive-fill"></i>
+                    Repositorio
+                    <span class="sr-only">(current)</span>
+                </a>
+
+                <a class="nav-link" href="#">
+                    <i class="bi bi-people-fill"></i>
+                    Grupos
+                    <span class="sr-only">(current)</span>
+                </a>
+
+            </ul>
+        </div>
+
+        <div class="nav-item" style="margin: auto;">
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search" size="80px">
+                <button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
+            </form>
+        </div>
+
+        <div class="nav-item" style="margin-right: 0;">
+            <form class="form-inline my-2 my-lg-0">
+                <button class="btn btn-info my-2 my-sm-0" type="submit" style="margin-left: 5px;">Log In</button>
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit" style="margin-left: 5px;">Sign-Up</button>
+            </form>
+        </div>
+
+    </nav>
+    <!--FIN DE BARRA DE NAVEGACION-->
+
+    <!-- INICIO DE CONTENIDO-->
+    <div class="container-fluid" style="margin-top: 20px;">
+        {% block content %}{% endblock %}
+    </div>
+    <!-- FIN DE CONTENIDO-->
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    {% block additionalScripts%}<script></script>{% endblock%}        
+
+</body>
+
+</html>
