@@ -80,8 +80,8 @@ DATABASES = {
         'NAME': 'devconnect',
         'USER': 'root',
         'PASSWORD': '840862_Mr',
-        'HOST': 'localhost',  # Cambia esto si tu MySQL está en otro servidor
-        'PORT': '3306',       # Puerto de MySQL
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
