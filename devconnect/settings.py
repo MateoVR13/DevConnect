@@ -80,8 +80,8 @@ DATABASES = {
         "NAME": "devconnect",
         "USER": "root",
         "PASSWORD": "acy_vmEqSpaUCyusfQal_O",
-        "HOST": "localhost",  # Puede variar según la configuración de tu servidor MySQL.
-        "PORT": "3306",  # Deja esto vacío para usar el puerto predeterminado.
+        "HOST": "localhost",
+        "PORT": "3306", 
     }
 }
 
