@@ -79,7 +79,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "devconnect",
         "USER": "root",
-        "PASSWORD": "840862_Mr",
+        "PASSWORD": "acy_vmEqSpaUCyusfQal_O",
         "HOST": "localhost",  # Puede variar según la configuración de tu servidor MySQL.
         "PORT": "3306",  # Deja esto vacío para usar el puerto predeterminado.
     }
