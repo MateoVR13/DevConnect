@@ -76,9 +76,15 @@
 
         <div class="nav-item" style="margin-right: 0;">
             <form class="form-inline my-2 my-lg-0">
-                <button class="btn btn-info my-2 my-sm-0" type="submit" style="margin-left: 5px;">Log In</button>
-                <button class="btn btn-outline-light my-2 my-sm-0" type="submit"
+                
+                {% if user.is_authenticated %} 
+                <button class="bi bi-person-circle btn btn-info my-2 my-sm-0" style="margin-left: 5px;" > {{ user.username }}</button>
+                {% else %}
+                    <button class="btn btn-info my-2 my-sm-0" type="submit" style="margin-left: 5px;">Log In</button>
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit"
                     style="margin-left: 5px;">Sign-Up</button>
+                {% endif %}
+        
             </form>
         </div>
 
