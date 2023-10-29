@@ -87,6 +87,9 @@ DATABASES = {
 
 AUTH_USER_MODEL = 'appdevconnect.Usuario'
 
+LOGOUT_REDIRECT_URL = 'Inicio'
+
+
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
