@@ -42,4 +42,5 @@ def user_login(request):
         error_message = None
 
     return render(request, 'paginas/loginPage.html', {'form': form, 'error_message': error_message})
+
             

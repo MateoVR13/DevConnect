@@ -17,3 +17,10 @@ class UserRegistrationForm(forms.ModelForm):
 class UserLoginForm(forms.Form):
     username = forms.CharField(required=True, label="Nombre de usuario")
     password = forms.CharField(widget=forms.PasswordInput(), required=True, label="Contraseña")
+    
+    
+class questionRegistrationForm(forms.ModelForm):
+    question_title = forms.CharField(max_length=50, required=True, initial="")
+    question_topic = forms.CharField(max_length=30, required=True, initial="")
+    question_language = forms.CharField(max_length=20, required=True, initial="")
+    question_body = forms.CharField(max_length=2000, required=True, initial="")
