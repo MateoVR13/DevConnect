@@ -1,26 +1,11 @@
 from django import forms
+from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Usuario
 
-class UserRegistrationForm(forms.ModelForm):
-    username = forms.CharField(max_length=30, required=True, initial="")
-    password = forms.CharField(widget=forms.PasswordInput(), required=True, initial="")
-    first_name = forms.CharField(max_length=60, required=True, initial="")
-    last_name = forms.CharField(max_length=60, required=True, initial="")
-    email = forms.EmailField(max_length=254, required=True, initial="")
+class CustomRegistrationForm(UserCreationForm):
+    # Agrega campos personalizados si es necesario
+    email = forms.EmailField(required=True)
 
     class Meta:
-        model = Usuario
-        fields = ('username','password', 'email', 'first_name', 'last_name')
-        
-        
-class UserLoginForm(forms.Form):
-    username = forms.CharField(required=True, label="Nombre de usuario")
-    password = forms.CharField(widget=forms.PasswordInput(), required=True, label="Contraseña")
-    
-    
-class questionRegistrationForm(forms.ModelForm):
-    question_title = forms.CharField(max_length=50, required=True, initial="")
-    question_topic = forms.CharField(max_length=30, required=True, initial="")
-    question_language = forms.CharField(max_length=20, required=True, initial="")
-    question_body = forms.CharField(max_length=2000, required=True, initial="")
+        model = User
+        fields = ('username', 'email', 'password1', 'password2')

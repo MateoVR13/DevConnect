@@ -34,7 +34,7 @@
 </head>
 
 
-<body>
+<body style="background-color: rgb(242, 242, 242)">
 
 
     <!--INICIO DE BARRA DE NAVEGACION-->
@@ -44,7 +44,7 @@
 
             <ul class="navbar-nav mr-auto">
 
-                <a><img src="appdevconnect/static/img/favicon.png" alt="Logo de DevConnect" class="logo-img"
+                <a><img src="/appdevconnect/static/img/favicon.png" alt="Logo de DevConnect" class="logo-img"
                         style="width: 45px;"></a>
 
                 <a class="navbar-brand" href="#">DevConnect</a>
@@ -77,16 +77,16 @@
             <form class="form-inline my-2 my-lg-0">
 
                 {% if user.is_authenticated %}
-                <button class="bi bi-person-circle btn btn-info my-2 my-sm-0" style="margin-left: 5px;">
+                <button class="bi bi-person-circle btn btn-info my-2 my-sm-0"
+                    style="margin-left: 5px; border-radius: 25px;">
                     {{user.username}}</button>
-                <a href="{% url 'logout' %}" class="btn btn-danger" style="margin-left: 5px;">
-                    <i class="bi bi-x-circle"></i> Cerrar
+                <a href="{% url 'logout' %}" class="btn btn-danger" style="margin-left: 5px; border-radius: 25px;">
+                    <i class="bi bi-x-circle"></i> Logout
                 </a>
+
                 {% else %}
-                <button class="btn btn-info my-2 my-sm-0" type="button" style="margin-left: 5px;"><a
-                        href="{% url 'Login' %}" style="text-decoration: none; color: white;">Log In</a></button>
-                <button class="btn btn-outline-light my-2 my-sm-0" type="button" style="margin-left: 5px;"><a
-                        href="{% url 'Register' %}" style="text-decoration: none; color: white;">Sign-Up</a></button>
+                <a href="{% url 'login' %}" class="btn btn-info my-2 my-sm-0" style="margin-left: 5px; border-radius: 25px">Login</a>
+                <a href="{% url 'register' %}" class="btn btn-outline-light my-2 my-sm-0" style="margin-left: 5px; border-radius: 25px;">Sign-Up</a>
                 {% endif %}
 
             </form>

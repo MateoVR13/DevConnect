@@ -1,9 +1,12 @@
 from django.contrib import admin
-from .models import Usuario, Pregunta, Respuesta, Proyecto
+from django.contrib.auth.models import User
+from .models import Pregunta, Respuesta, Proyecto
 
-@admin.register(Usuario)
-class UsuariosAdmin(admin.ModelAdmin):
-    list_display = ['username',  'first_name', 'last_name','email']
+class CustomUserAdmin(admin.ModelAdmin):
+    list_display = ['username', 'first_name', 'last_name', 'email']
+
+admin.site.unregister(User)
+admin.site.register(User, CustomUserAdmin)
 
 @admin.register(Pregunta)
 class PreguntasAdmin(admin.ModelAdmin):

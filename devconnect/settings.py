@@ -85,7 +85,9 @@ DATABASES = {
     }
 }
 
-AUTH_USER_MODEL = 'appdevconnect.Usuario'
+AUTH_USER_MODEL = 'auth.User'
+
+LOGIN_REDIRECT_URL = "Inicio"
 
 LOGOUT_REDIRECT_URL = 'Inicio'
 
