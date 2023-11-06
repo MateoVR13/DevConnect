@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import login
+
 from .forms import CustomRegistrationForm
 
 def foro(request):
@@ -11,8 +13,8 @@ def register(request):
     if request.method == 'POST':
         form = CustomRegistrationForm(request.POST)
         if form.is_valid():
-            form.save()
-            # Redirige al usuario a una página de confirmación o a donde desees
+            user = form.save()
+            login(request, user)
             return redirect('Foro')
     else:
         form = CustomRegistrationForm()

@@ -1,35 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Registro de Usuario</title>
-</head>
-<body>
-    <h1>Registro de Usuario</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.non_field_errors }}
-        <div>
-            {{ form.username.label_tag }}
-            {{ form.username }}
-            {{ form.username.errors }}
-        </div>
-        <div>
-            {{ form.email.label_tag }}
-            {{ form.email }}
-            {{ form.email.errors }}
-        </div>
-        <div>
-            {{ form.password1.label_tag }}
-            {{ form.password1 }}
-            {{ form.password1.errors }}
-        </div>
-        <div>
-            {{ form.password2.label_tag }}
-            {{ form.password2 }}
-            {{ form.password2.errors }}
-        </div>
-        <button type="submit">Registrarse</button>
-    </form>
-</body>
-</html>
+{% extends "baseTemplate.html" %}
+
+{% block title %} DevConnect | Login {% endblock %}
+
+{% block content %}
+
+
+<div class="row">
+
+    <div class="col-4">
+    </div>
+    <div class="col-1">
+    </div>
+
+    <div class="col-2"
+
+        style="padding: 10px; border-radius: 15px; margin-top: 200px; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2); background-color: white;">
+        <form method="post">
+            <div class="text-center">
+              <a><img src="/appdevconnect/static/img/logoForms.png" alt="Logo de DevConnect" class="logo-img" style="width: 270px;"></a>
+            </div>
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="{{ form.username.id_for_label }}">Username*</label>
+              <input type="text" class="form-control" id="{{ form.username.id_for_label }}" name="{{ form.username.name }}" placeholder="Username" required>
+              {{ form.username.errors }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.email.id_for_label }}">Email*</label>
+                <input type="text" class="form-control" id="{{ form.email.id_for_label }}" name="{{ form.email.name }}" placeholder="Email" required>
+                {{ form.username.errors }}
+              </div>
+            <div class="form-group">
+              <label for="{{ form.password1.id_for_label }}">Password*</label>
+              <input type="password" class="form-control" id="{{ form.password1.id_for_label }}" name="{{ form.password1.name }}" placeholder="" required>
+              {{ form.password1.errors }}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.password2.id_for_label }}">Confirm Password*</label>
+              <input type="password" class="form-control" id="{{ form.password2.id_for_label }}" name="{{ form.password2.name }}" placeholder="" required>
+              {{ form.password2.errors }}
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary" style="margin-top: 15px; width: 300px; border-radius: 25px">Registrarse</button>
+            </div>
+          </form>
+          
+    </div>
+
+    <div class="col-4">
+    </div>
+    <div class="col-1">
+    </div>
+
+</div>
+
+{% endblock %}
