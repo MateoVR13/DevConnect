@@ -5,9 +5,10 @@ from . import views
 
 urlpatterns = [
      
-     path('', views.foro, name='Inicio'),
+     path('', views.listar_preguntas, name='Inicio'),
      path("accounts/", include("django.contrib.auth.urls")),
      path('accounts/register/', views.register, name='register'),
-     path('foro', views.foro, name='Foro'),
+     path('pregunta', views.crear_pregunta, name='Pregunta'),
+     path('foro', views.listar_preguntas, name='Foro'),
      path('proyectos', views.proyectos, name='Proyectos'),
 ]

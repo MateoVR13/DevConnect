@@ -1,3 +1,7 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+<link rel="stylesheet" href="appdevconnect/static/css/highlights.css">
+
 {% extends "baseTemplate.html" %}
 
 {% block title %} DevConnect | Foro {% endblock %}
@@ -39,7 +43,35 @@
 
         </section>
 
-        {% include "questionTemplate.html"%}
+        {% for pregunta in preguntas %}
+            <div class="card" style="padding: 0px; margin:10px; border: 1px solid #c0c0c0;">
+
+                <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <h5 class="card-title">{{ pregunta.question_title }}</h5>
+                    {% if user.is_authenticated and user == pregunta.user %}
+                    <div>
+                        <a href="" class="bi bi-pencil-square btn btn-outline-dark" style="width: 80px; border-radius: 25px;"></a>
+                        <a href="" class="bi bi-trash-fill btn btn-outline-danger" style="width: 80px; border-radius: 25px;"></a>
+                    </div>
+                    {% endif %}
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><strong>Usuario: </strong>{{ pregunta.user.username }}</li>
+                    <li class="list-group-item"><strong>Lenguaje: </strong>{{ pregunta.question_language }}</li>
+                    <li class="list-group-item"><strong>Tema: </strong> {{ pregunta.question_topic }}</li>
+                </ul>
+
+                <div class="card-body" id="codeBlock" style="padding-left: 100px">
+            
+                    <pre class="hljs"><code>
+                        
+                        {{ pregunta.question_body }}
+            
+                    </code></pre>
+                </div>
+
+            </div>
+        {% endfor %}
 
     </div>
 
