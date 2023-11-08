@@ -54,6 +54,11 @@
 
             <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
                 <h5 class="card-title">{{ pregunta.question_title }}</h5>
+                {% if user.is_authenticated and user != pregunta.user %}
+                <div>
+                    <a href="{% url 'responder_pregunta' pregunta.id %}" class="btn btn-success" style="border-radius: 25px;">Responder</a>
+                </div>
+                {% endif %}
                 {% if user.is_authenticated and user == pregunta.user %}
                 <div>
                     <a href="{% url 'editar_pregunta' pregunta.id %}" id="botonEditar"
@@ -77,6 +82,18 @@
             
                     </code></pre>
             </div>
+            
+            <li class="list-group-item">
+            <h4>Respuestas</h4>
+            </li>
+
+            {% for respuesta in pregunta.respuesta_set.all %}
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <strong>Usuario: </strong>{{ respuesta.user }} | <strong>Respuesta: </strong>{{ respuesta.answer_body }} | <strong>Respondida: </strong>{{ respuesta.answer_date }}
+                </li>
+            </ul>
+            {% endfor %}
 
         </div>
         {% endfor %}

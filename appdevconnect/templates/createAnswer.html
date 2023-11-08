@@ -1,0 +1,49 @@
+{% extends "baseTemplate.html" %}
+
+{% block title %} Responder a la Pregunta | DevConnect {% endblock %}
+
+{% block content %}
+
+<div class="card" style="padding: 0px; margin:10px; border: 1px solid #c0c0c0;">
+
+    <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+        <h5 class="card-title">{{ pregunta.question_title }}</h5>
+    </div>
+
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><strong>Publicada por: </strong>{{ pregunta.user.username }} |
+            <strong>Lenguaje: </strong>{{ pregunta.question_language }}
+            | <strong>Tema: </strong> {{ pregunta.question_topic }} | <strong>Fecha de Publicación: </strong> {{
+            pregunta.question_date }}
+        </li>
+    </ul>
+
+    <div class="card-body" id="codeBlock" style="padding-left: 100px">
+        <pre class="hljs"><code>
+            {{ pregunta.question_body }}
+        </code></pre>
+    </div>
+
+    <ul class="list-group list-group-flush">
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group col-12">
+                <textarea class="form-control" id="{{ form.answer_body.id_for_label }}"
+                    name="{{ form.answer_body.name }}" placeholder="Tu respuesta aquí..." style="margin-top: 10px;"
+                    required></textarea>
+            </div>
+
+            <div class="form-group col-3">
+                <button type="submit" class="btn btn-success">Responder</button>
+            </div>
+
+        </form>
+
+    </ul>
+
+
+
+</div>
+
+{% endblock %}

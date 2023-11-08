@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
-from .forms import PreguntaForm
-from .models import Pregunta
+from .forms import PreguntaForm, RespuestaForm
+from .models import Pregunta, Respuesta
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 
@@ -64,4 +64,20 @@ def borrar_pregunta(request, pregunta_id):
         pregunta.delete()
     
     return redirect('Foro')
+
+def responder_pregunta(request, pregunta_id):
+    pregunta = Pregunta.objects.get(id=pregunta_id)
+    
+    if request.method == 'POST':
+        form = RespuestaForm(request.POST)
+        if form.is_valid():
+            respuesta = form.save(commit=False)
+            respuesta.question = pregunta
+            respuesta.user = request.user
+            respuesta.save()
+            return redirect('Foro')
+    else:
+        form = RespuestaForm()
+
+    return render(request, 'createAnswer.html', {'pregunta': pregunta, 'form': form})
 
