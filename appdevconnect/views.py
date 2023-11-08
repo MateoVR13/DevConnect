@@ -3,6 +3,7 @@ from django.contrib.auth import login
 from .forms import PreguntaForm
 from .models import Pregunta
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
 
 from .forms import CustomRegistrationForm
 
@@ -39,4 +40,28 @@ def crear_pregunta(request):
 def listar_preguntas(request):
     preguntas = Pregunta.objects.all()
     return render(request, 'paginas/paginaForo.html', {'preguntas': preguntas})
+
+@login_required(login_url='accounts/login')
+def editar_pregunta(request, pregunta_id):
+    pregunta = get_object_or_404(Pregunta, id=pregunta_id)
+
+    if request.method == 'POST':
+        form = PreguntaForm(request.POST, instance=pregunta)
+        if form.is_valid():
+            form.save()
+            return redirect('Foro')
+
+    else:
+        form = PreguntaForm(instance=pregunta)
+
+    return render(request, 'editQuestion.html', {'form': form, 'pregunta': pregunta})
+
+@login_required(login_url='accounts/login')
+def borrar_pregunta(request, pregunta_id):
+    pregunta = get_object_or_404(Pregunta, id=pregunta_id)
+
+    if request.user == pregunta.user:
+        pregunta.delete()
+    
+    return redirect('Foro')
 

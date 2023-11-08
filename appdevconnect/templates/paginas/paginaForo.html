@@ -23,17 +23,23 @@
 
             <div class="nav-item" style="margin: auto;">
                 <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search" size="50px" style="border-radius: 25px">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search"
+                        size="50px" style="border-radius: 25px">
                     <button class="btn btn-dark my-2 my-sm-0" type="button" style="border-radius: 25px">Buscar</button>
                 </form>
             </div>
 
+            <div>
+                <a href="{% url 'Pregunta' %}" class="btn btn-warning my-2 my-sm-0" type="button"
+                    style="border-radius: 25px; margin-right: 10px">Preguntar</a>
+            </div>
+
             <a class="btn btn-secondary active dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border-radius: 25px;">
                 Filtrar Preguntas
             </a>
 
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="border-radius: 25px;">
                 <a class="dropdown-item" href="#">Más Recientes</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Más Votadas</a>
@@ -44,33 +50,35 @@
         </section>
 
         {% for pregunta in preguntas %}
-            <div class="card" style="padding: 0px; margin:10px; border: 1px solid #c0c0c0;">
+        <div class="card" style="padding: 0px; margin:10px; border: 1px solid #c0c0c0;">
 
-                <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
-                    <h5 class="card-title">{{ pregunta.question_title }}</h5>
-                    {% if user.is_authenticated and user == pregunta.user %}
-                    <div>
-                        <a href="" class="bi bi-pencil-square btn btn-outline-dark" style="width: 80px; border-radius: 25px;"></a>
-                        <a href="" class="bi bi-trash-fill btn btn-outline-danger" style="width: 80px; border-radius: 25px;"></a>
-                    </div>
-                    {% endif %}
+            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                <h5 class="card-title">{{ pregunta.question_title }}</h5>
+                {% if user.is_authenticated and user == pregunta.user %}
+                <div>
+                    <a href="{% url 'editar_pregunta' pregunta.id %}" id="botonEditar"
+                        class="bi bi-pencil-square btn btn-outline-dark" style="width: 80px; border-radius: 25px;"></a>
+                    <a href="{% url 'borrar_pregunta' pregunta.id %}" id="botonBorrar"
+                        class="bi bi-trash-fill btn btn-outline-danger" style="width: 80px; border-radius: 25px;"></a>
                 </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><strong>Usuario: </strong>{{ pregunta.user.username }}</li>
-                    <li class="list-group-item"><strong>Lenguaje: </strong>{{ pregunta.question_language }}</li>
-                    <li class="list-group-item"><strong>Tema: </strong> {{ pregunta.question_topic }}</li>
-                </ul>
+                {% endif %}
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Publicada por: </strong>{{ pregunta.user.username }} |
+                    <strong>Lenguaje: </strong>{{ pregunta.question_language }}
+                    | <strong>Tema: </strong> {{ pregunta.question_topic }} | <strong>Fecha de Publicación: </strong> {{ pregunta.question_date }}</li>
+            </ul>
 
-                <div class="card-body" id="codeBlock" style="padding-left: 100px">
-            
-                    <pre class="hljs"><code>
+            <div class="card-body" id="codeBlock" style="padding-left: 100px">
+
+                <pre class="hljs"><code>
                         
                         {{ pregunta.question_body }}
             
                     </code></pre>
-                </div>
-
             </div>
+
+        </div>
         {% endfor %}
 
     </div>
