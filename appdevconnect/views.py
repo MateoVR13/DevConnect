@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
-from .forms import PreguntaForm, RespuestaForm
-from .models import Pregunta, Respuesta
+from .forms import PreguntaForm, RespuestaForm, ProyectoForm
+from .models import Pregunta, Respuesta, Proyecto
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 
@@ -10,6 +10,9 @@ from .forms import CustomRegistrationForm
 
 def proyectos(request):
     return render(request, 'paginas/paginaProyectos.html')
+
+def enciclopedia(request):
+    return render(request, 'paginas/paginaEnciclopedia.html')
 
 def register(request):
     if request.method == 'POST':
@@ -65,6 +68,7 @@ def borrar_pregunta(request, pregunta_id):
     
     return redirect('Foro')
 
+@login_required(login_url='accounts/login')
 def responder_pregunta(request, pregunta_id):
     pregunta = Pregunta.objects.get(id=pregunta_id)
     
@@ -81,3 +85,47 @@ def responder_pregunta(request, pregunta_id):
 
     return render(request, 'createAnswer.html', {'pregunta': pregunta, 'form': form})
 
+@login_required(login_url='/accounts/login')
+def registrar_proyecto(request):
+    if request.method == 'POST':
+        form = ProyectoForm(request.POST, request.FILES)
+        if form.is_valid():
+            proyecto = form.save(commit=False)
+            proyecto.user = request.user
+            proyecto.save()
+            return redirect('Proyectos')
+    else:
+        form = ProyectoForm()
+    
+    return render(request, 'createProject.html', {'form': form})
+
+
+def listar_proyectos(request):
+    proyectos = Proyecto.objects.all()
+    return render(request, 'paginas/paginaProyectos.html', {'proyectos': proyectos})
+
+
+def proyectos_alfabetico(request):
+    proyectos = Proyecto.objects.order_by('project_title')
+    return render(request, 'paginas/paginaProyectos.html', {'proyectos': proyectos})
+
+def proyectos_recientes(request):
+    proyectos = Proyecto.objects.order_by('-project_upload_date')
+    return render(request, 'paginas/paginaProyectos.html', {'proyectos': proyectos})
+
+def proyectos_antiguos(request):
+    proyectos = Proyecto.objects.order_by('project_upload_date')
+    return render(request, 'paginas/paginaProyectos.html', {'proyectos': proyectos})
+
+
+def preguntas_alfabetico(request):
+    preguntas = Pregunta.objects.order_by('question_title')
+    return render(request, 'paginas/paginaForo.html', {'preguntas': preguntas})
+
+def preguntas_recientes(request):
+    preguntas = Pregunta.objects.order_by('-question_date')
+    return render(request, 'paginas/paginaForo.html', {'preguntas': preguntas})
+
+def preguntas_antiguos(request):
+    preguntas = Pregunta.objects.order_by('question_date')
+    return render(request, 'paginas/paginaForo.html', {'preguntas': preguntas})

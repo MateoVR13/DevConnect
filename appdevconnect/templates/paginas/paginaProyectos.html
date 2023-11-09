@@ -8,18 +8,53 @@
 
 
 {% block content %}
-    <div class="row">
-        {% include 'projectCardTemplate.html'%}
-        {% include 'projectCardTemplate.html'%}
-        {% include 'projectCardTemplate.html'%}
-        {% include 'projectCardTemplate.html'%}
-        {% include 'projectCardTemplate.html'%}
-        {% include 'projectCardTemplate.html'%}
-        {% include 'projectCardTemplate.html'%}
-        {% include 'projectCardTemplate.html'%}
-        {% include 'projectCardTemplate.html'%}
-        {% include 'projectCardTemplate.html'%}
-        {% include 'projectCardTemplate.html'%}
-        {% include 'projectCardTemplate.html'%}
+<section style="margin-top: -25px; padding: 20px; display: flex; justify-content: space-between; align-items: center">
+
+    <h3 style="margin: 0;">Proyectos</h3>
+
+    <div>
+        <a href="{% url 'registrar_proyecto' %}" class="btn btn-warning my-2 my-sm-0" type="button"
+            style="border-radius: 25px; margin-right: 10px">Agregar Proyecto</a>
+
+        <a class="btn btn-secondary active dropdown-toggle" href="#" id="navbarDropdown" role="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border-radius: 25px;">
+            Filtrar Proyectos
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="border-radius: 25px;">
+            <a class="dropdown-item" href="{% url 'proyectos_alfabetico' %}">Alfabético</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'proyectos_recientes' %}">Más Reciente</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'proyectos_antiguos' %}">Más Antiguo</a>
+        </div>
+
     </div>
+
+</section>
+
+<div class="row">
+    {% for proyecto in proyectos %}
+    <div class="col-3" style="padding: 40px;">
+
+        <div class="card w-100 h-100" style="box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2)">
+            <img class="card-img-top" src="{{proyecto.preview_image}}" alt="Card image cap"
+                style="padding:5px; border: 1px solid #e1e1e1;">
+            <div class="card-body  h-100">
+                <h5 class="card-title"><b>{{proyecto.project_title}}</b></h5>
+                <p class="card-text">{{proyecto.project_description}}</p>
+            </div>
+            <ul class="list-group list-group-flush h-50">
+                <li class="list-group-item border-light"><strong>Usuario: </strong>{{proyecto.user.username}}</li>
+                <li class="list-group-item border-light"><strong>Tema: </strong>{{proyecto.project_topic}}</li>
+                <li class="list-group-item border-light"><strong>Lenguaje: </strong>{{proyecto.project_language}}</li>
+            </ul>
+            <div class="card-body text-center">
+                <a href="{{proyecto.archivo_content}}" class="btn btn-success" target="_blank">Descargar Proyecto</a>
+            </div>
+        </div>
+
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}
